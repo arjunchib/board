@@ -9,7 +9,7 @@
     "src/main.ts",
     "src/main.server.ts",
     "server.ts",
-    "src/polyfills.ts"
+    "src/zone-flags.ts"
   ],
   "include": ["src/**/*.d.ts"]
 }

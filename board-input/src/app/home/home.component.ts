@@ -5,7 +5,7 @@ import {
   afterNextRender,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +14,6 @@ import { FormsModule, NgModel } from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   host: {
-    '(document:mousedown)': 'onDown($event)',
     '(document:mouseup)': 'onUp($event)',
   },
 })
