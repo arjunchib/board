@@ -3,9 +3,11 @@ import {
   ElementRef,
   ViewChild,
   afterNextRender,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +26,7 @@ export class HomeComponent {
   @ViewChild('canvas') private canvasChild!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   private penDown = false;
+  private http = inject(HttpClient);
 
   constructor() {
     afterNextRender(() => {
@@ -77,5 +80,16 @@ export class HomeComponent {
 
   setLineWidth() {
     this.ctx.lineWidth = this.lineWidth;
+  }
+
+  upload() {
+    this.canvas.toBlob((blob) => {
+      this.http
+        .post('/api/upload', blob, {
+          headers: { 'Content-Type': 'image/png' },
+          responseType: 'text',
+        })
+        .subscribe(() => console.log('uploaded!'));
+    });
   }
 }

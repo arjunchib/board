@@ -1,5 +1,6 @@
 import { renderApplication } from '@angular/platform-server';
 import bootstrap from './src/main.server';
+import { api } from './api/api';
 
 interface Env {
   ASSETS: { fetch: typeof fetch };
@@ -27,11 +28,9 @@ async function workerFetchHandler(request: Request, env: Env) {
 }
 
 export default {
-  fetch: (request: Request, env: Env) => {
-    const url = new URL(request.url);
-    if (url.pathname.startsWith('/api/')) {
-      return new Response('Ok');
-    }
+  fetch: async (request: Request, env: Env) => {
+    const apiResponse = await api(request, env as any);
+    if (apiResponse) return apiResponse;
     return (globalThis as any)['__zone_symbol__Promise'].resolve(
       workerFetchHandler(request, env)
     );
