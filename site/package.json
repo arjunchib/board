@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npx wrangler pages dev --proxy 4200 -- ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -26,6 +26,7 @@
     "@angular-devkit/build-angular": "^17.0.7",
     "@angular/cli": "^17.0.7",
     "@angular/compiler-cli": "^17.0.0",
+    "@cloudflare/workers-types": "^4.20231121.0",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.16",
     "jasmine-core": "~5.1.0",
