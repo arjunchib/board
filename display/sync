@@ -1,2 +1,2 @@
 #!/bin/zsh
-rsync -azP . ollie:~/src/ollie-board
+rsync -azP --filter=':- .gitignore' . ollie:~/src/ollie-board
