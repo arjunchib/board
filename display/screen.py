@@ -9,10 +9,10 @@ import requests
 picdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pic')
 logging.basicConfig(level=logging.DEBUG)
 
-def display():
+def display(image="latest.png"):
     try:
         logging.info("download image")
-        r = requests.get("http://r2.ollie.arjunchib.com/test.png")
+        r = requests.get("http://r2.ollie.arjunchib.com/" + image)
         file = os.path.join(picdir, 'download.png')
         with open(file, 'wb') as outfile:
             outfile.write(r.content)
