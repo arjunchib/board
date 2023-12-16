@@ -36,6 +36,7 @@ export class HomeComponent {
       this.ctx.fillStyle = 'black';
       this.fixHighRes();
       this.setLineWidth();
+      this.clear();
     });
   }
 
@@ -75,7 +76,10 @@ export class HomeComponent {
   }
 
   clear() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    const fill = this.ctx.fillStyle;
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillStyle = fill;
   }
 
   setLineWidth() {
