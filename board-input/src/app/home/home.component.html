@@ -9,27 +9,29 @@
         (mousedown)="onDown($event)"
       ></canvas>
     </div>
-    <button
-      (click)="clear()"
-      type="button"
-      class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    >
-      Clear
-    </button>
-    <input
-      type="range"
-      step="1"
-      min="1"
-      max="10"
-      [(ngModel)]="lineWidth"
-      (ngModelChange)="setLineWidth()"
-    />
-    <button
-      (click)="upload()"
-      type="button"
-      class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-    >
-      Upload
-    </button>
+    <div class="flex justify-between">
+      <button
+        (click)="clear()"
+        type="button"
+        class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Clear
+      </button>
+      <input
+        type="range"
+        step="1"
+        min="1"
+        max="10"
+        [(ngModel)]="lineWidth"
+        (ngModelChange)="setLineWidth()"
+      />
+      <button
+        (click)="upload()"
+        type="button"
+        class="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      >
+        Upload
+      </button>
+    </div>
   </div>
 </div>

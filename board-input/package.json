@@ -10,7 +10,8 @@
     "serve:ssr:board-input": "node dist/board-input/server/server.mjs",
     "process": "node ./tools/copy-files.mjs && node ./tools/alter-polyfills.mjs",
     "pages:build": "ng build && npm run process",
-    "deploy": "npm run pages:build && wrangler pages deploy dist/cloudflare"
+    "deploy": "npm run pages:build && wrangler pages deploy dist/cloudflare",
+    "dev": "ng serve --configuration development"
   },
   "private": true,
   "dependencies": {
