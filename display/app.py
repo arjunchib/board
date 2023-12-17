@@ -8,5 +8,5 @@ def webhook():
     if request.method == 'POST':
         content = request.json
         print("Data received from Webhook is: ", content)
-        display(content['image'])
+        display()
         return "Webhook received!"

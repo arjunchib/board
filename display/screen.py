@@ -6,17 +6,19 @@ from waveshare_epd import epd4in2
 from PIL import Image
 import requests
 
-picdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pic')
+current_dir = os.path.dirname(os.path.realpath(__file__))
+picdir = os.path.join(current_dir, 'pic')
+image_file = os.path.join(picdir, 'download.png')
+etag_file = os.path.join(current_dir, 'etag')
 logging.basicConfig(level=logging.DEBUG)
 
-def display(image="latest.png"):
+def display():
     try:
         logging.info("download image")
-        r = requests.get("http://r2.ollie.arjunchib.com/" + image)
-        file = os.path.join(picdir, 'download.png')
-        with open(file, 'wb') as outfile:
-            outfile.write(r.content)
-        
+        new_image = download_image()
+        if not new_image:
+            return
+
         logging.info("start")
         epd = epd4in2.EPD()
 
@@ -39,3 +41,20 @@ def display(image="latest.png"):
         logging.info("ctrl + c:")
         epd4in2.epdconfig.module_exit()
         exit()
+
+def download_image(image):
+    try:
+        with open(etag_file) as f:
+            etag = f.read().splitlines()[0]
+    except:
+        etag = ""
+    headers = { 'If-None-Match': etag }
+    r = requests.get("https://board.arjunchib.com/latest", headers=headers)
+    if r.status_code == 200:
+        with open(etag_file, 'w') as outfile:
+            outfile.write(r.headers.get('etag'))
+        with open(image_file, 'wb') as outfile:
+            outfile.write(r.content)
+        return True
+    elif r.status_code == 304:
+        return False
