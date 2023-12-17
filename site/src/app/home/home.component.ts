@@ -1,6 +1,7 @@
 import {
   Component,
   ElementRef,
+  NgZone,
   ViewChild,
   afterNextRender,
   inject,
@@ -22,11 +23,13 @@ import { HttpClient } from '@angular/common/http';
 export class HomeComponent {
   title = 'Ollie Board';
   lineWidth = 5;
+  uploadDisabled = false;
 
   @ViewChild('canvas') private canvasChild!: ElementRef<HTMLCanvasElement>;
   private ctx!: CanvasRenderingContext2D;
   private penDown = false;
   private http = inject(HttpClient);
+  private zone = inject(NgZone);
 
   constructor() {
     afterNextRender(() => {
@@ -87,13 +90,18 @@ export class HomeComponent {
   }
 
   upload() {
+    this.uploadDisabled = true;
     this.canvas.toBlob((blob) => {
-      this.http
-        .post('/upload', blob, {
-          headers: { 'Content-Type': 'image/png' },
-          responseType: 'text',
-        })
-        .subscribe(() => console.log('uploaded!'));
+      this.zone.run(() => {
+        this.http
+          .post('/upload', blob, {
+            headers: { 'Content-Type': 'image/png' },
+            responseType: 'text',
+          })
+          .subscribe(() => {
+            this.uploadDisabled = false;
+          });
+      });
     });
   }
 }
