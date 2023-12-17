@@ -99,9 +99,7 @@ export class HomeComponent {
     const offsetY = touch.clientY - rect.y;
     this.penDown = true;
     this.ctx.beginPath();
-    this.ctx.arc(offsetX, offsetY, this.lineWidth / 2, 0, 2 * Math.PI);
     this.ctx.fill();
-    this.ctx.beginPath();
     this.ctx.lineCap = 'round';
     this.ctx.lineJoin = 'round';
   }
