@@ -42,7 +42,7 @@ def display():
         epd4in2.epdconfig.module_exit()
         exit()
 
-def download_image(image):
+def download_image():
     try:
         with open(etag_file) as f:
             etag = f.read().splitlines()[0]

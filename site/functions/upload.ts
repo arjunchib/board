@@ -10,7 +10,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     await context.env.BUCKET.put(filename, stream2),
   ]);
   context.waitUntil(
-    fetch('https://ollie.arjunchib.com/webhook', {
+    fetch('http://ollie.arjunchib.com/webhook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
