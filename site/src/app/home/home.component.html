@@ -1,15 +1,18 @@
 <div class="grid inset-0 absolute place-content-center bg-slate-100">
-  <div>
+  <div class="max-w-[calc(100vw-20px)]">
     <div class="p-1 shadow-md rounded-md bg-white cursor-crosshair mb-5">
       <canvas
         #canvas
         width="400"
         height="300"
+        class="max-w-full"
         (mousemove)="onMove($event)"
         (mousedown)="onDown($event)"
+        (touchmove)="onTouchMove($event)"
+        (touchstart)="onTouchStart($event)"
       ></canvas>
     </div>
-    <div class="flex justify-between">
+    <div class="flex justify-between flex-wrap gap-2.5">
       <button
         (click)="clear()"
         type="button"

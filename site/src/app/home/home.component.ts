@@ -18,6 +18,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './home.component.css',
   host: {
     '(document:mouseup)': 'onUp($event)',
+    '(document:touchend)': 'onTouchEnd($event)',
   },
 })
 export class HomeComponent {
@@ -54,7 +55,7 @@ export class HomeComponent {
     this.canvas.height = rect.height * dpr;
     this.ctx.scale(dpr, dpr);
     this.canvas.style.width = `${rect.width}px`;
-    this.canvas.style.height = `${rect.height}px`;
+    // this.canvas.style.height = `${rect.height}px`;
   }
 
   onMove(e: MouseEvent) {
@@ -75,6 +76,37 @@ export class HomeComponent {
   }
 
   onUp() {
+    this.penDown = false;
+  }
+
+  onTouchMove(e: TouchEvent) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    if (this.penDown) {
+      const rect = this.canvas.getBoundingClientRect();
+      const offsetX = touch.clientX - rect.x;
+      const offsetY = touch.clientY - rect.y;
+      this.ctx.lineTo(offsetX, offsetY);
+      this.ctx.stroke();
+    }
+  }
+
+  onTouchStart(e: TouchEvent) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const rect = this.canvas.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.x;
+    const offsetY = touch.clientY - rect.y;
+    this.penDown = true;
+    this.ctx.beginPath();
+    this.ctx.arc(offsetX, offsetY, this.lineWidth / 2, 0, 2 * Math.PI);
+    this.ctx.fill();
+    this.ctx.beginPath();
+    this.ctx.lineCap = 'round';
+    this.ctx.lineJoin = 'round';
+  }
+
+  onTouchEnd() {
     this.penDown = false;
   }
 
