@@ -9,11 +9,35 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {
+  NgIconComponent,
+  provideIcons,
+  provideNgIconsConfig,
+} from '@ng-icons/core';
+import {
+  radixTrash,
+  radixEraser,
+  radixUpload,
+  radixPencil1,
+  radixUpdate,
+} from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgIconComponent],
+  providers: [
+    provideIcons({
+      radixTrash,
+      radixEraser,
+      radixUpload,
+      radixPencil1,
+      radixUpdate,
+    }),
+    provideNgIconsConfig({
+      size: '1.5em',
+    }),
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   host: {
@@ -23,6 +47,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent {
   title = 'Ollie Board';
+  mode: 'pencil' | 'eraser' = 'pencil';
   lineWidth = 5;
   uploadDisabled = false;
 
@@ -113,6 +138,18 @@ export class HomeComponent {
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = fill;
+  }
+
+  enableEraser() {
+    this.mode = 'eraser';
+    this.ctx.fillStyle = 'white';
+    this.ctx.strokeStyle = 'white';
+  }
+
+  enablePencil() {
+    this.mode = 'pencil';
+    this.ctx.fillStyle = 'black';
+    this.ctx.strokeStyle = 'black';
   }
 
   setLineWidth() {
