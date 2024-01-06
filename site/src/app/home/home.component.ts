@@ -47,6 +47,7 @@ import {
 })
 export class HomeComponent {
   title = 'Ollie Board';
+  mode: 'pencil' | 'eraser' = 'pencil';
   lineWidth = 5;
   uploadDisabled = false;
 
@@ -137,6 +138,14 @@ export class HomeComponent {
     this.ctx.fillStyle = 'white';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.ctx.fillStyle = fill;
+  }
+
+  enablePencil() {
+    this.mode = 'pencil';
+  }
+
+  enableEraser() {
+    this.mode = 'eraser';
   }
 
   setLineWidth() {

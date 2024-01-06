@@ -13,10 +13,26 @@
       ></canvas>
     </div>
     <div
-      class="flex bg-indigo-500 rounded-md shadow-md divide-x divide-indigo-600 text-white"
+      class="flex bg-indigo-500 rounded-md shadow-md divide-x divide-indigo-700 border border-solid border-indigo-700 text-white overflow-hidden"
     >
-      <button (click)="clear()" type="button" class="p-1">
+      <button (click)="clear()" type="button" class="p-1 hover:bg-red-400">
         <ng-icon name="radixTrash" class="!block" />
+      </button>
+      <button
+        (click)="enableEraser()"
+        type="button"
+        class="p-1 hover:bg-indigo-400"
+        [class.!bg-indigo-600]="mode === 'eraser'"
+      >
+        <ng-icon name="radixEraser" class="!block" />
+      </button>
+      <button
+        (click)="enablePencil()"
+        type="button"
+        class="p-1 hover:bg-indigo-400"
+        [class.!bg-indigo-600]="mode === 'pencil'"
+      >
+        <ng-icon name="radixPencil1" class="!block" />
       </button>
       <div class="flex-grow p-1 px-2 flex items-center">
         <input
@@ -32,7 +48,7 @@
       <button
         (click)="upload()"
         type="button"
-        class="p-1"
+        class="p-1 hover:bg-emerald-400"
         [disabled]="uploadDisabled"
       >
         @if (uploadDisabled) {
