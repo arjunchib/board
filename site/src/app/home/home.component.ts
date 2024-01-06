@@ -140,12 +140,16 @@ export class HomeComponent {
     this.ctx.fillStyle = fill;
   }
 
-  enablePencil() {
-    this.mode = 'pencil';
-  }
-
   enableEraser() {
     this.mode = 'eraser';
+    this.ctx.fillStyle = 'white';
+    this.ctx.strokeStyle = 'white';
+  }
+
+  enablePencil() {
+    this.mode = 'pencil';
+    this.ctx.fillStyle = 'black';
+    this.ctx.strokeStyle = 'black';
   }
 
   setLineWidth() {
