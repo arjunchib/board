@@ -9,11 +9,35 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import {
+  NgIconComponent,
+  provideIcons,
+  provideNgIconsConfig,
+} from '@ng-icons/core';
+import {
+  radixTrash,
+  radixEraser,
+  radixUpload,
+  radixPencil1,
+  radixUpdate,
+} from '@ng-icons/radix-icons';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NgIconComponent],
+  providers: [
+    provideIcons({
+      radixTrash,
+      radixEraser,
+      radixUpload,
+      radixPencil1,
+      radixUpdate,
+    }),
+    provideNgIconsConfig({
+      size: '1.5em',
+    }),
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   host: {
