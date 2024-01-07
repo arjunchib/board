@@ -9,23 +9,23 @@ import {
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import {
-  NgIconComponent,
-  provideIcons,
-  provideNgIconsConfig,
-} from '@ng-icons/core';
+import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   radixTrash,
   radixEraser,
   radixUpload,
   radixPencil1,
   radixUpdate,
+  radixTokens,
+  radixImage,
 } from '@ng-icons/radix-icons';
+import { ImageGalleryComponent } from '../image-gallery/image-gallery.component';
+import { ModalService } from '../services/modal/modal.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgIconComponent],
+  imports: [CommonModule, FormsModule, NgIconComponent, ImageGalleryComponent],
   providers: [
     provideIcons({
       radixTrash,
@@ -33,9 +33,8 @@ import {
       radixUpload,
       radixPencil1,
       radixUpdate,
-    }),
-    provideNgIconsConfig({
-      size: '1.5em',
+      radixTokens,
+      radixImage,
     }),
   ],
   templateUrl: './home.component.html',
@@ -56,6 +55,7 @@ export class HomeComponent {
   private penDown = false;
   private http = inject(HttpClient);
   private zone = inject(NgZone);
+  private modalService = inject(ModalService);
 
   constructor() {
     afterNextRender(() => {
@@ -67,6 +67,10 @@ export class HomeComponent {
       this.setLineWidth();
       this.clear();
     });
+  }
+
+  openGallery() {
+    this.modalService.open(ImageGalleryComponent);
   }
 
   private get canvas() {

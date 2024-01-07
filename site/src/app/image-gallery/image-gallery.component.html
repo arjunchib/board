@@ -1,0 +1,32 @@
+<div
+  class="hidden sm:grid grid-cols-5 grid-rows-4 gap-1 aspect-video max-h-full"
+>
+  @for (image of images(); track image.key) {
+  <img [src]="imageSrc(image.key)" class="" />
+  }
+</div>
+
+<div class="sm:hidden grid grid-cols-2 grid-rows-3 gap-1 max-h-full">
+  @for (image of images(); track image.key) {
+  <img [src]="imageSrc(image.key)" class="" />
+  }
+</div>
+
+<div
+  class="absolute bottom-0 left-1/2 -translate-x-1/2 p-2 flex gap-1 opacity-30 hover:opacity-100 transition-opacity"
+>
+  <button
+    [disabled]="!imageService.hasPrev()"
+    (click)="prev()"
+    class="border border-solid border-indigo-500 text-white bg-indigo-500 rounded-md shadow-md hover:shadow-none hover:bg-indigo-400 hover:border-indigo-500 transition-all p-1 disabled:bg-slate-400 disabled:border-slate-500 disabled:opacity-70 disabled:shadow-sm"
+  >
+    <ng-icon name="radixArrowLeft" class="!block" />
+  </button>
+  <button
+    [disabled]="!imageService.hasNext()"
+    (click)="next()"
+    class="border border-solid border-indigo-500 text-white bg-indigo-500 rounded-md shadow-md hover:shadow-none hover:bg-indigo-400 hover:border-indigo-500 transition-all p-1 disabled:bg-slate-400 disabled:border-slate-500 disabled:opacity-70 disabled:shadow-sm"
+  >
+    <ng-icon name="radixArrowRight" class="!block" />
+  </button>
+</div>

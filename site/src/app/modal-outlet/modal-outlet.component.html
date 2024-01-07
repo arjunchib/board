@@ -1,0 +1,18 @@
+@if (modalService.visible) {
+<div @modal class="fixed inset-0 z-10 grid place-content-center">
+  <div
+    @backdrop
+    class="absolute inset-0 opacity-20 bg-slate-500"
+    (click)="modalService.close()"
+  ></div>
+  <div @panel class="relative m-4 shadow-lg rounded-lg overflow-hidden">
+    <button
+      (click)="modalService.close()"
+      class="absolute top-0 right-0 m-2 border border-solid border-red-400 text-white bg-red-300 rounded-md shadow-md opacity-70 hover:opacity-100 hover:shadow-none hover:bg-red-400 hover:border-red-500 transition-all p-1 z-10"
+    >
+      <ng-icon name="radixCross2" class="!block"></ng-icon>
+    </button>
+    <ng-container *ngComponentOutlet="modalService.dialog" />
+  </div>
+</div>
+}
