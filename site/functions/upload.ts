@@ -8,6 +8,14 @@ interface Env {
   DB: D1Database;
 }
 
+function chunk(arr: unknown[], chunkSize = 20) {
+  const chunkedArr = [];
+  for (let i = 0; i < arr.length; i += chunkSize) {
+    chunkedArr.push(arr.slice(i, i + chunkSize));
+  }
+  return chunkedArr;
+}
+
 export const onRequest: PagesFunction<Env> = async (context) => {
   const db = drizzle(context.env.DB);
   const [stream1, stream2] = context.request.body.tee();
@@ -22,7 +30,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
         path: img.key,
         created_at: img.uploaded,
       }));
-    await db.insert(images).values(values);
+    await Promise.all(chunk(values).map((c) => db.insert(images).values(c)));
+    // await db.insert(images).values(values);
   }
   await Promise.all([
     await context.env.BUCKET.put('latest.png', stream1),
