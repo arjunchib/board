@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "npx wrangler pages dev --proxy 4200 --r2=BUCKET -- ng serve",
+    "start": "npx wrangler pages dev --proxy 4200 --r2=BUCKET --d1 DB=e8baf055-b992-4ed2-99e1-b691fc7205e1 -- ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate": "drizzle-kit generate:sqlite --schema=schema.ts"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,7 @@
     "@angular/router": "^17.0.0",
     "@ng-icons/core": "^26.3.0",
     "@ng-icons/radix-icons": "^26.3.0",
+    "drizzle-orm": "^0.29.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -31,6 +33,7 @@
     "@cloudflare/workers-types": "^4.20231121.0",
     "@types/jasmine": "~5.1.0",
     "autoprefixer": "^10.4.16",
+    "drizzle-kit": "^0.20.10",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",

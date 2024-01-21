@@ -1,4 +1,13 @@
-<div class="grid inset-0 absolute place-content-center bg-slate-100">
+<div class="fixed right-1 top-1 z-10">
+  <button
+    (click)="openGallery()"
+    class="border border-solid border-indigo-500 text-white bg-indigo-500 rounded-md shadow-md hover:shadow-none hover:bg-indigo-400 hover:border-indigo-500 transition-all p-1"
+  >
+    <ng-icon name="radixImage" class="!block" />
+  </button>
+</div>
+
+<div class="grid inset-0 absolute place-content-center">
   <div class="max-w-[calc(100vw-20px)]">
     <div class="p-1 shadow-md rounded-md bg-white cursor-crosshair mb-5">
       <canvas

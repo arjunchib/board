@@ -1,0 +1,11 @@
+[[d1_databases]]
+binding = "DB"
+database_name = "prod-d1-board"
+database_id = "e8baf055-b992-4ed2-99e1-b691fc7205e1"
+migrations_dir = "drizzle"
+
+[[d1_databases]]
+binding = "DB_STAGING"
+database_name = "staging-d1-board"
+database_id = "f94f6b84-5599-4cb8-9c3c-7c2b779f92cf"
+migrations_dir = "drizzle"
